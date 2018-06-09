@@ -151,8 +151,12 @@ if [ "$TRAVIS_COMMIT" != "$target_commit_sha" ] ; then
 
   if [ ! -z "$TRAVIS_JOB_ID" ] ; then
     if [ -z "${UPLOADTOOL_BODY+x}" ] ; then
+      commit_url="https://api.github.com/repos/$REPO_SLUG/git/commits/$TRAVIS_COMMIT"
+      commit_infos=$(curl -XGET $commit_url)
+      commit_message=$(echo "$commit_infos" | grep '"message":' | cut -d '"' -f 4)
       # TODO: The host could be travis-ci.org (legacy open source) or travis-ci.com (subscription or latest open source).
-      BODY="Travis CI build log: https://travis-ci.org/$REPO_SLUG/builds/$TRAVIS_BUILD_ID/"
+      build_log_link="Travis CI build log: https://travis-ci.org/$REPO_SLUG/builds/$TRAVIS_BUILD_ID/"
+      BODY="$commit_message\n\n$build_log_link"
     else
       BODY="$UPLOADTOOL_BODY"
     fi
