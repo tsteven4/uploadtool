@@ -157,6 +157,9 @@ if [ "$TRAVIS_COMMIT" != "$target_commit_sha" ] ; then
       # TODO: The host could be travis-ci.org (legacy open source) or travis-ci.com (subscription or latest open source).
       build_log_link="Travis CI build log: https://travis-ci.org/$REPO_SLUG/builds/$TRAVIS_BUILD_ID/"
       BODY="$commit_message\n\n$build_log_link"
+echo "commit_message: $commit_message"
+echo "buld_log_link: $build_log_link"
+echo "BODY: $BODY"
     else
       BODY="$UPLOADTOOL_BODY"
     fi
