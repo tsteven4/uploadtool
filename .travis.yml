@@ -7,7 +7,7 @@ env:
  
 script:
   - cp upload.sh upload-$ARCH.sh
-  - UPLOADTOOL_BODY="" bash ./upload.sh upload-$ARCH.sh
+  - bash ./upload.sh upload-$ARCH.sh
 
 branches:
   except:
